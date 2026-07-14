@@ -69,13 +69,3 @@ std::vector<const char *> HelloTriangleApplication::getRequiredExtentions() {
   }
   return extensions;
 }
-
-/*
-static VKAPI_ATTR VkBool32 VKAPI_CALL HelloTriangleApplication::debugCallBack(
-    VkDebugUtilsMessageSeverityFlagBitsEXT messageSeverity,
-    VkDebugUtilsMessageTypeFlagsEXT messageType,
-    const VkDebugUtilsMessengerCallbackDataEXT *pCallbackData,
-    void *pUserData) {
-  return VK_FALSE;
-}
-*/

@@ -2,10 +2,12 @@
 
 #include <GLFW/glfw3.h>
 #include <cstring>
+#include <iostream>
 #include <stdexcept>
 #include <vector>
 #include <vulkan/vulkan.h>
 #include <vulkan/vulkan_core.h>
+
 constexpr uint32_t WIDTH = 800;
 constexpr uint32_t HEIGHT = 600;
 
@@ -26,9 +28,10 @@ private:
   VkInstance instance;
   std::vector<const char *> getRequiredExtentions();
   static VKAPI_ATTR VkBool32 VKAPI_CALL
-  debugCallback(VkDebugUtilsMessageSeverityFlagBitsEXT,
-                VkDebugUtilsMessageTypeFlagBitsEXT,
-                const VkDebugUtilsMessengerCallbackDataEXT *, void *);
+  debugCallBack(VkDebugUtilsMessageSeverityFlagBitsEXT messageSeverity,
+                VkDebugUtilsMessageTypeFlagsEXT messageType,
+                const VkDebugUtilsMessengerCallbackDataEXT *pCallbackData,
+                void *pUserData);
 };
 #ifdef NDEBUG
 const bool enableValidationLayers = false;
