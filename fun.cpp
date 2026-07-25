@@ -35,9 +35,13 @@ void HelloTriangleApplication::mainLoop() {
 }
 
 void HelloTriangleApplication::cleanup() {
-  vkDestroyInstance(instance, nullptr);
-  glfwDestroyWindow(window);
-  glfwTerminate();
+    if(enableValidationLayers)
+    {
+        DestroyDebugUtilsMessengerEXT(instance,debugMessenger,nullptr);
+    }
+    vkDestroyInstance(instance, nullptr);
+    glfwDestroyWindow(window);
+    glfwTerminate();
 }
 bool HelloTriangleApplication::checkValidationLayerSupport() {
   uint32_t layerCount;
