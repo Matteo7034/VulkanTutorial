@@ -1,6 +1,6 @@
 CXX = g++
 CFLAGS = -std=c++17 -O2
-LDFLAGS = -lglfw -lvulkan -ldl -lpthread -lX11  -lXrandr #-lXi
+LDFLAGS = -lglfw -lvulkan -ldl -lpthread -lX11  -lXrandr -lXi
 
 SRC = main.cpp fun.cpp init.cpp debug.cpp
 OBJ = $(SRC:.cpp=.o)

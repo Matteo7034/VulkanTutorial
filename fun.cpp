@@ -6,6 +6,7 @@
 
 const std::vector<const char *> validationLayers = {
     "VK_LAYER_KHRONOS_validation"};
+
 void HelloTriangleApplication::run() {
   initWindow();
   initVulkan();
@@ -24,6 +25,7 @@ void HelloTriangleApplication::initVulkan() {
   // Inizializzo vulkan...
   std::cout << "Vulkan init..." << std::endl;
   createInstance();
+  setupDebugMessager();
 }
 
 void HelloTriangleApplication::mainLoop() {
