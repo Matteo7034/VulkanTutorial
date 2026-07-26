@@ -1,6 +1,6 @@
 #include <vulkan/vulkan.h>
 //
-#include "fun.h"
+#include "../include/fun.h"
 #include <cstdlib>
 #include <iostream>
 // GLFW

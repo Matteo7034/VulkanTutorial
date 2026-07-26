@@ -1,4 +1,4 @@
-#include "fun.h"
+#include "../include/fun.h"
 #include <cstdint>
 #include <iostream>
 #include <vector>

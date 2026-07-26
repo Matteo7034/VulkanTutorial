@@ -1,4 +1,4 @@
-#include "fun.h"
+#include "../include/fun.h"
 
 void HelloTriangleApplication::setupDebugMessager(){
     if(!enableValidationLayers) return;
