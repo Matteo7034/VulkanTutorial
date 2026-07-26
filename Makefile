@@ -2,7 +2,7 @@ CXX = g++
 CFLAGS = -std=c++17 -O2 -Iinclude -Wall
 LDFLAGS = -lglfw -lvulkan -ldl -lpthread -lX11  -lXrandr -lXi
 
-SRC = src/main.cpp src/fun.cpp src/init.cpp utils/debug.cpp
+SRC = src/main.cpp src/app.cpp src/init.cpp utils/debug.cpp src/device.cpp
 OBJ = $(SRC:.cpp=.o)
 
 TARGET = VulkanTest

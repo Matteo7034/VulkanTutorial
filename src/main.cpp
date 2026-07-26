@@ -1,6 +1,6 @@
 #include <vulkan/vulkan.h>
 //
-#include "../include/fun.h"
+#include "../include/app.hpp"
 #include <cstdlib>
 #include <iostream>
 // GLFW
@@ -8,7 +8,7 @@
 #include <GLFW/glfw3.h>
 
 int main() {
-  HelloTriangleApplication app;
+    App::HelloTriangleApplication app;
 
   try {
     app.run();
