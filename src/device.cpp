@@ -4,7 +4,7 @@
 
 namespace VkDevices{
 
-    void pickPhysicalDevice(VkInstance instance)
+    VkPhysicalDevice pickPhysicalDevice(VkInstance instance)
     {
         VkPhysicalDevice physicalDevice = VK_NULL_HANDLE;
         uint32_t deviceCount =0;
@@ -40,6 +40,8 @@ namespace VkDevices{
         } else {
             throw std::runtime_error("failed to find a suitable GPU!");
         }
+
+        return physicalDevice;
     }
 
     int rateDeviceSuitability(VkPhysicalDevice device){

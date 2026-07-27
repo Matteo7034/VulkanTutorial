@@ -8,7 +8,7 @@
 
 namespace VkDevices {
 
-    void pickPhysicalDevice(VkInstance instance); 
+    VkPhysicalDevice pickPhysicalDevice(VkInstance instance); 
     
     int rateDeviceSuitability(VkPhysicalDevice device);
     
@@ -16,7 +16,7 @@ namespace VkDevices {
     struct QueueFamilyIndices {
         std::optional<uint32_t> graphicsFamily;
 
-        bool isComplete(){
+        bool isComplete() const {
             return graphicsFamily.has_value();
         }
     };
