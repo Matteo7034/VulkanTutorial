@@ -43,6 +43,12 @@ namespace VkDevices{
     }
 
     int rateDeviceSuitability(VkPhysicalDevice device){
+        
+        QueueFamilyIndices indices = findQueueFamilies(device);
+        
+        if (!indices.isComplete()){
+            return 0;
+        }
         // Properties:
         VkPhysicalDeviceProperties deviceProperties;
         vkGetPhysicalDeviceProperties(device,&deviceProperties);
@@ -65,6 +71,30 @@ namespace VkDevices{
         
        // return deviceProperties.deviceType == VK_PHYSICAL_DEVICE_TYPE_DISCRETE_GPU && deviceFeatures.geometryShader;
         return score;
+    }
+    
+
+    QueueFamilyIndices findQueueFamilies(VkPhysicalDevice device){
+        QueueFamilyIndices indices;
+        
+        uint32_t queueFamilyCount = 0;
+        vkGetPhysicalDeviceQueueFamilyProperties(device,&queueFamilyCount,nullptr);
+        std::vector<VkQueueFamilyProperties> queueFamilies(queueFamilyCount);
+        vkGetPhysicalDeviceQueueFamilyProperties(device,&queueFamilyCount,queueFamilies.data());
+        int i = 0;
+        for (const auto& queueFamily : queueFamilies)
+        {
+            if(queueFamily.queueFlags & VK_QUEUE_GRAPHICS_BIT)
+            {
+                indices.graphicsFamily = i;
+            }
+            i++;
+            // Se abbiamo trovato tutto quello che ci serve, usciamo subito dal ciclo!
+            if (indices.isComplete()) {
+                break;
+            }
+        }
+        return indices;
     }
 
 }
