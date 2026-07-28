@@ -6,7 +6,7 @@
 #include <iostream>
 #include <vector>
 #include <vulkan/vulkan_core.h>
-
+#include <GLFW/glfw3.h>
 namespace App{
     void HelloTriangleApplication::run() {
       initWindow();
@@ -24,15 +24,21 @@ namespace App{
 
 
     void HelloTriangleApplication::initVulkan() {
-      // Inizializzo vulkan...
-      std::cout << "Vulkan init..." << std::endl;
-      
-      instance = VulkanInit::createInstance();
-      VulkanDebug::setupDebugMessager(instance,debugMessenger);
-      physicalDevice = VkDevices::pickPhysicalDevice(instance);
-      device = VkDevices::createLogicalDevice(physicalDevice,graphicsQueue);
+        // Inizializzo vulkan...
+        std::cout << "Vulkan init..." << std::endl;
+  
+        instance = VulkanInit::createInstance();
+        VulkanDebug::setupDebugMessager(instance,debugMessenger);
+        createSurface(); 
+        physicalDevice = VkDevices::pickPhysicalDevice(instance,surface);
+        device = VkDevices::createLogicalDevice(
+                physicalDevice,
+                surface,
+                graphicsQueue,
+                presentQueue
+                );
     }
-
+    
     void HelloTriangleApplication::mainLoop() {
       while (!glfwWindowShouldClose(window)) {
         glfwPollEvents();
@@ -48,8 +54,15 @@ namespace App{
         {
             VulkanDebug::DestroyDebugUtilsMessengerEXT(instance,debugMessenger,nullptr);
        }
+        vkDestroySurfaceKHR(instance,surface,nullptr);
         vkDestroyInstance(instance, nullptr);
         glfwDestroyWindow(window);
         glfwTerminate();
+    }
+    void HelloTriangleApplication::createSurface(){
+        if(glfwCreateWindowSurface(instance,window,nullptr,&surface)!=VK_SUCCESS)
+        {
+            throw std::runtime_error("failed to create window surface!");
+        }
     }
 } //namespcae App

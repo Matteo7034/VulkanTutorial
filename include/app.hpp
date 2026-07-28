@@ -1,5 +1,5 @@
 #pragma once
-
+#define GLFW_INCLUDE_VULKAN
 #include <GLFW/glfw3.h>
 #include <cstring>
 #include <iostream>
@@ -25,13 +25,15 @@ namespace App {
         void mainLoop();
         void cleanup();
         void createInstance();
+        void createSurface();
+
         VkInstance instance; 
         GLFWwindow *window;
-        void pickPhysicalDevice();
-        
         VkDebugUtilsMessengerEXT debugMessenger;
         VkDevice device;
         VkPhysicalDevice physicalDevice;
         VkQueue graphicsQueue;    
+        VkSurfaceKHR surface;
+        VkQueue presentQueue;
     };
 }// namespace App
