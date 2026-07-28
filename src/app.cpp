@@ -28,7 +28,7 @@ namespace App{
       std::cout << "Vulkan init..." << std::endl;
       
       instance = VulkanInit::createInstance();
-      VulkanDebug::setupDebugMessager(instance);
+      VulkanDebug::setupDebugMessager(instance,debugMessenger);
       physicalDevice = VkDevices::pickPhysicalDevice(instance);
       device = VkDevices::createLogicalDevice(physicalDevice,graphicsQueue);
     }
@@ -46,7 +46,7 @@ namespace App{
         }
         if(enableValidationLayers)
         {
-            VulkanDebug::DestroyDebugUtilsMessengerEXT(instance,VulkanDebug::debugMessenger,nullptr);
+            VulkanDebug::DestroyDebugUtilsMessengerEXT(instance,debugMessenger,nullptr);
        }
         vkDestroyInstance(instance, nullptr);
         glfwDestroyWindow(window);

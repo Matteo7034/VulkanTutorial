@@ -29,6 +29,7 @@ namespace App {
         GLFWwindow *window;
         void pickPhysicalDevice();
         
+        VkDebugUtilsMessengerEXT debugMessenger;
         VkDevice device;
         VkPhysicalDevice physicalDevice;
         VkQueue graphicsQueue;    

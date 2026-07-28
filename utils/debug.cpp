@@ -7,8 +7,7 @@ const std::vector<const char*> validationLayers = {
 };
 
 namespace VulkanDebug {
-    VkDebugUtilsMessengerEXT debugMessenger;
-    void setupDebugMessager(VkInstance instance){
+    void setupDebugMessager(VkInstance instance,VkDebugUtilsMessengerEXT& debugMessenger){
         if(!enableValidationLayers) return;
         VkDebugUtilsMessengerCreateInfoEXT createInfo{};
         populateDebugMessengerCreateInfo(createInfo);
@@ -84,7 +83,7 @@ namespace VulkanDebug {
 
 
     void DestroyDebugUtilsMessengerEXT(VkInstance instance,
-            VkDebugUtilsMessengerEXT debugMessager,
+            VkDebugUtilsMessengerEXT debugMessenger,
             const VkAllocationCallbacks* pAllocator){
         auto func= (PFN_vkDestroyDebugUtilsMessengerEXT)
             vkGetInstanceProcAddr(instance, "vkDestroyDebugUtilsMessengerEXT");

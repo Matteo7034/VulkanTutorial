@@ -16,7 +16,6 @@ extern const std::vector<const char *> validationLayers;
 
 namespace VulkanDebug {
     
-    extern VkDebugUtilsMessengerEXT debugMessenger;
     
     bool checkValidationLayerSupport();
     
@@ -29,7 +28,7 @@ namespace VulkanDebug {
                 void *pUserData);
     
     
-    void setupDebugMessager(VkInstance instance);
+    void setupDebugMessager(VkInstance instance, VkDebugUtilsMessengerEXT& debugMessenger);
     
     VkResult CreateDebugUtilsMessengerEXT(VkInstance instance,
             const VkDebugUtilsMessengerCreateInfoEXT* pCreateInfo, 
