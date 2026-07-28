@@ -29,7 +29,8 @@ namespace App{
       
       instance = VulkanInit::createInstance();
       VulkanDebug::setupDebugMessager(instance);
-      VkDevices::pickPhysicalDevice(instance);
+      physicalDevice = VkDevices::pickPhysicalDevice(instance);
+      device = VkDevices::createLogicalDevice(physicalDevice,graphicsQueue);
     }
 
     void HelloTriangleApplication::mainLoop() {
@@ -39,6 +40,10 @@ namespace App{
     }
 
     void HelloTriangleApplication::cleanup() {
+        if(device != VK_NULL_HANDLE){
+            vkDestroyDevice(device,nullptr);
+            device = VK_NULL_HANDLE;
+        }
         if(enableValidationLayers)
         {
             VulkanDebug::DestroyDebugUtilsMessengerEXT(instance,VulkanDebug::debugMessenger,nullptr);

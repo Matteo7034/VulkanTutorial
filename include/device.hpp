@@ -5,7 +5,7 @@
 #include <vector>
 #include <map>
 #include <optional>
-
+#include "../include/debug.hpp"
 namespace VkDevices {
 
     VkPhysicalDevice pickPhysicalDevice(VkInstance instance); 
@@ -22,5 +22,6 @@ namespace VkDevices {
     };
 
     QueueFamilyIndices findQueueFamilies(VkPhysicalDevice device);
-
+    
+    VkDevice createLogicalDevice(VkPhysicalDevice physicaldevice,VkQueue& graphicsQueue);
 }

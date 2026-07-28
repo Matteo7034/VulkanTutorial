@@ -28,5 +28,9 @@ namespace App {
         VkInstance instance; 
         GLFWwindow *window;
         void pickPhysicalDevice();
+        
+        VkDevice device;
+        VkPhysicalDevice physicalDevice;
+        VkQueue graphicsQueue;    
     };
 }// namespace App
