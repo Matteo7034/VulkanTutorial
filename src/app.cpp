@@ -47,7 +47,8 @@ namespace App{
     }
 
     void HelloTriangleApplication::cleanup() {
-        vkDestroySwapchainKHR(device,swapChain,nullptr);
+        if(swapChain != VK_NULL_HANDLE)
+            vkDestroySwapchainKHR(device,swapChain,nullptr);
         if(device != VK_NULL_HANDLE){
             vkDestroyDevice(device,nullptr);
             device = VK_NULL_HANDLE;
@@ -69,11 +70,16 @@ namespace App{
     }
     void HelloTriangleApplication::createSwapChain()
     {
-        SwapChain::SwapChainSupportDetails swapChainSupport = SwapChain::querySwapChainSupport(physicalDevice,surface);
+        SwapChain::SwapChainSupportDetails swapChainSupport =
+            SwapChain::querySwapChainSupport(physicalDevice,surface);
 
-        VkSurfaceFormatKHR surfaceFormat = SwapChain::chooseSwapSurfaceFormat(swapChainSupport.formats);
-        VkPresentModeKHR presentMode = SwapChain::chooseSwapPresentMode(swapChainSupport.presentModes);
-        VkExtent2D extent = SwapChain::chooseSwapExtent(swapChainSupport.capabilities,window);
+        VkSurfaceFormatKHR surfaceFormat = 
+            SwapChain::chooseSwapSurfaceFormat(swapChainSupport.formats);
+        VkPresentModeKHR presentMode = 
+            SwapChain::chooseSwapPresentMode(swapChainSupport.presentModes);
+        VkExtent2D extent = 
+            SwapChain::chooseSwapExtent(swapChainSupport.capabilities,window);
+        
         uint32_t imageCount = swapChainSupport.capabilities.minImageCount + 1;
         if(swapChainSupport.capabilities.maxImageCount > 0 &&
                 imageCount > swapChainSupport.capabilities.maxImageCount){
@@ -90,8 +96,10 @@ namespace App{
         createInfo.imageArrayLayers = 1;
         createInfo.imageUsage = VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT;
 
-        VkDevices::QueueFamilyIndices indices = VkDevices::findQueueFamilies(physicalDevice,surface);
-        uint32_t queueFamilyIndices[] = { indices.graphicsFamily.value(), indices.presentFamily.value()};
+        VkDevices::QueueFamilyIndices indices = 
+            VkDevices::findQueueFamilies(physicalDevice,surface);
+        uint32_t queueFamilyIndices[] = 
+        { indices.graphicsFamily.value(), indices.presentFamily.value()};
 
         if(indices.graphicsFamily != indices.presentFamily){
             createInfo.imageSharingMode = VK_SHARING_MODE_CONCURRENT;
@@ -113,5 +121,12 @@ namespace App{
                 != VK_SUCCESS){
             throw std::runtime_error("failed to create swap chain!");
         }
+
+        vkGetSwapchainImagesKHR(device,swapChain,&imageCount,nullptr);
+        swapChainImages.resize(imageCount);
+        vkGetSwapchainImagesKHR(device,swapChain,&imageCount,swapChainImages.data());
+        
+        swapChainImageFormat = surfaceFormat.format;
+        swapChainExtent = extent;
     }
 } //namespcae App

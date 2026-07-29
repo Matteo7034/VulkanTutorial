@@ -1,7 +1,7 @@
 # VulkanTutorial
 Progressi nello studio di VulkanTutorial...
 ## Tree:
-![Tree](assets/screen.png)
+![Tree](assets/screen1.png)
 
 ## Usage:
 
