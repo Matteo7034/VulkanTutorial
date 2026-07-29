@@ -43,14 +43,30 @@ namespace VkDevices{
 
         return physicalDevice;
     }
-
+    bool checkDeviceExtensionSupport(VkPhysicalDevice device){
+        uint32_t extensionCount;
+        vkEnumerateDeviceExtensionProperties(device,nullptr, &extensionCount,nullptr);
+        std::vector<VkExtensionProperties> aviableExtensions(extensionCount);
+        vkEnumerateDeviceExtensionProperties(device,nullptr,&extensionCount,aviableExtensions.data());
+        std::set<std::string> requiredExtensions(deviceExtensions.begin(),deviceExtensions.end());
+        for(const auto& extension : aviableExtensions){
+            requiredExtensions.erase(extension.extensionName);
+        }
+        bool supported = requiredExtensions.empty();
+        if(supported){
+            std::cout<<"[INFO] GPU extension supported: VK_KHR_swapchain\n";
+        }else{
+            std::cout<<"[Error] GPU extension NOT supported: VK_KHR_swapchain\n";
+        }
+        return supported;
+    }
+       
     int rateDeviceSuitability(VkPhysicalDevice device,VkSurfaceKHR surface){
         
-        QueueFamilyIndices indices = findQueueFamilies(device,surface);
-        
-        if (!indices.isComplete()){
-            return 0;
-        }
+        QueueFamilyIndices indices = findQueueFamilies(device,surface); 
+        if (!indices.isComplete()) return 0;
+        bool extensionsSupported = checkDeviceExtensionSupport(device); 
+        if (!checkDeviceExtensionSupport) return 0; 
         // Properties:
         VkPhysicalDeviceProperties deviceProperties;
         vkGetPhysicalDeviceProperties(device,&deviceProperties);

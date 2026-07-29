@@ -7,13 +7,20 @@
 #include <optional>
 #include "../include/debug.hpp"
 #include <set>
+
 namespace VkDevices {
+
+    //needed for swapchain 
+    const std::vector<const char*> deviceExtensions = {
+        VK_KHR_SWAPCHAIN_EXTENSION_NAME
+    };
 
     VkPhysicalDevice pickPhysicalDevice(VkInstance instance,VkSurfaceKHR surface); 
     
     int rateDeviceSuitability(VkPhysicalDevice device,VkSurfaceKHR surface);
     
-    
+    bool checkDeviceExtensionSupport(VkPhysicalDevice device);
+
     struct QueueFamilyIndices {
         std::optional<uint32_t> graphicsFamily;
         std::optional<uint32_t> presentFamily;
