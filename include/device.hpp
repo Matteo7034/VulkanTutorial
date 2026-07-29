@@ -7,7 +7,7 @@
 #include <optional>
 #include "../include/debug.hpp"
 #include <set>
-
+#include "../include/swapchain.hpp"
 namespace VkDevices {
 
     //needed for swapchain 

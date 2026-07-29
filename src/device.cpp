@@ -65,8 +65,19 @@ namespace VkDevices{
         
         QueueFamilyIndices indices = findQueueFamilies(device,surface); 
         if (!indices.isComplete()) return 0;
+        //extensionSupport
         bool extensionsSupported = checkDeviceExtensionSupport(device); 
-        if (!checkDeviceExtensionSupport) return 0; 
+        if (!extensionsSupported) return 0; 
+        //swapchain
+        bool swapChainAdequate = false;
+        if(extensionsSupported)
+        {
+            SwapChain::SwapChainSupportDetails swapChainSupport = SwapChain::querySwapChainSupport(device,surface);
+            swapChainAdequate = 
+                !swapChainSupport.formats.empty() &&
+                !swapChainSupport.presentModes.empty();
+        }
+        if(!swapChainAdequate) return 0;
         // Properties:
         VkPhysicalDeviceProperties deviceProperties;
         vkGetPhysicalDeviceProperties(device,&deviceProperties);
@@ -155,7 +166,8 @@ namespace VkDevices{
         createInfo.queueCreateInfoCount = static_cast<uint32_t>(queueCreateInfos.size());
         
         createInfo.pEnabledFeatures = &deviceFeatures;
-        createInfo.enabledExtensionCount = 0;
+        createInfo.enabledExtensionCount = static_cast<uint32_t>(deviceExtensions.size());
+        createInfo.ppEnabledExtensionNames=deviceExtensions.data(); 
 
         if(enableValidationLayers){
             createInfo.enabledLayerCount = static_cast<uint32_t>(validationLayers.size());
