@@ -26,7 +26,7 @@ namespace App {
         void cleanup();
         void createInstance();
         void createSurface();
-
+        void createSwapChain();
         VkInstance instance; 
         GLFWwindow *window;
         VkDebugUtilsMessengerEXT debugMessenger;
@@ -35,5 +35,6 @@ namespace App {
         VkQueue graphicsQueue;    
         VkSurfaceKHR surface;
         VkQueue presentQueue;
+        VkSwapchainKHR swapChain;
     };
 }// namespace App
