@@ -2,6 +2,7 @@
 #include "../include/debug.hpp"
 #include "../include/init.hpp"
 #include "../include/device.hpp"
+#include "../include/pipeline.hpp"
 #include <cstdint>
 #include <iostream>
 #include <vector>
@@ -39,6 +40,7 @@ namespace App{
                 );
         createSwapChain();
         createImageViews();
+        PipeLine::createGraphicsPipeline(device);
     }
     
     void HelloTriangleApplication::mainLoop() {
@@ -59,12 +61,16 @@ namespace App{
         }
         if(enableValidationLayers)
         {
-            VulkanDebug::DestroyDebugUtilsMessengerEXT(instance,debugMessenger,nullptr);
-       }
+            VulkanDebug::DestroyDebugUtilsMessengerEXT(
+                    instance,
+                    debugMessenger,
+                    nullptr);
+        }
         vkDestroySurfaceKHR(instance,surface,nullptr);
         vkDestroyInstance(instance, nullptr);
         glfwDestroyWindow(window);
         glfwTerminate();
+
     }
     void HelloTriangleApplication::createSurface(){
         if(glfwCreateWindowSurface(instance,window,nullptr,&surface)!=VK_SUCCESS)
