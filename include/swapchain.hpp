@@ -16,9 +16,24 @@ namespace SwapChain{
         std::vector<VkSurfaceFormatKHR> formats;
         std::vector<VkPresentModeKHR> presentModes;
     };
-    SwapChainSupportDetails querySwapChainSupport(VkPhysicalDevice device,VkSurfaceKHR surface);
+
+    SwapChainSupportDetails querySwapChainSupport(
+            VkPhysicalDevice device,
+            VkSurfaceKHR surface);
+    
     VkSurfaceFormatKHR chooseSwapSurfaceFormat(
             const std::vector<VkSurfaceFormatKHR>& availableFormats);
-    VkPresentModeKHR chooseSwapPresentMode(const std::vector<VkPresentModeKHR>& availablePresentModes);
-    VkExtent2D chooseSwapExtent(const VkSurfaceCapabilitiesKHR& capabilities,GLFWwindow* window);
+    
+    VkPresentModeKHR chooseSwapPresentMode(
+            const std::vector<VkPresentModeKHR>& availablePresentModes);
+    
+    VkExtent2D chooseSwapExtent(
+            const VkSurfaceCapabilitiesKHR& capabilities,
+            GLFWwindow* window);
+
+    std::vector<VkImageView> createImageViews(
+            VkDevice device,
+            const std::vector<VkImage>& swapChainImages,
+            VkFormat swapChainImageFormat
+            );
 }//namespace SwapChain

@@ -27,6 +27,7 @@ namespace App {
         void createInstance();
         void createSurface();
         void createSwapChain();
+        void createImageViews();
         VkInstance instance; 
         GLFWwindow *window;
         VkDebugUtilsMessengerEXT debugMessenger;
@@ -39,5 +40,6 @@ namespace App {
         std::vector<VkImage> swapChainImages;
         VkFormat swapChainImageFormat;
         VkExtent2D swapChainExtent;
+        std::vector<VkImageView> swapChainImageViews;
     };
 }// namespace App

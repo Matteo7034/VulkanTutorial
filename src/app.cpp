@@ -38,6 +38,7 @@ namespace App{
                 presentQueue
                 );
         createSwapChain();
+        createImageViews();
     }
     
     void HelloTriangleApplication::mainLoop() {
@@ -47,6 +48,9 @@ namespace App{
     }
 
     void HelloTriangleApplication::cleanup() {
+        for(auto imageView : swapChainImageViews){
+            vkDestroyImageView(device,imageView,nullptr);
+        }
         if(swapChain != VK_NULL_HANDLE)
             vkDestroySwapchainKHR(device,swapChain,nullptr);
         if(device != VK_NULL_HANDLE){
@@ -128,5 +132,11 @@ namespace App{
         
         swapChainImageFormat = surfaceFormat.format;
         swapChainExtent = extent;
+    }
+    void HelloTriangleApplication::createImageViews(){
+        swapChainImageViews = SwapChain::createImageViews(
+                device,
+                swapChainImages,
+                swapChainImageFormat);
     }
 } //namespcae App
