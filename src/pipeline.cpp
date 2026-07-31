@@ -16,6 +16,10 @@ namespace PipeLine{
     void createGraphicsPipeline(VkDevice device){
         auto vertShaderCode = readFile("shaders/vert.spv");
         auto fragShaderCode = readFile("shaders/frag.spv");
+        
+        std::cout<<"[INFO] Vertex Shader Code Size: "<<vertShaderCode.size()<<"\n";
+        std::cout<<"[INFO] Fragment Shader Code Size: "<<fragShaderCode.size()<<"\n";
+
         VkShaderModule vertShaderModule = createShaderModule(vertShaderCode,device);
         VkShaderModule fragShaderModule = createShaderModule(fragShaderCode,device);
         //vertShaderInfo

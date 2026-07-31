@@ -26,11 +26,12 @@ namespace App{
 
     void HelloTriangleApplication::initVulkan() {
         // Inizializzo vulkan...
-        std::cout << "Vulkan init..." << std::endl;
+        std::cout << "[INFO] Init Vulkan creating instance..." << std::endl;
   
         instance = VulkanInit::createInstance();
         VulkanDebug::setupDebugMessager(instance,debugMessenger);
         createSurface(); 
+        std::cout<<"[INFO] picking physical device\n";
         physicalDevice = VkDevices::pickPhysicalDevice(instance,surface);
         device = VkDevices::createLogicalDevice(
                 physicalDevice,
@@ -40,6 +41,7 @@ namespace App{
                 );
         createSwapChain();
         createImageViews();
+        std::cout<<"[INFO] creating Graphics pipeline\n";
         PipeLine::createGraphicsPipeline(device);
     }
     
@@ -50,6 +52,7 @@ namespace App{
     }
 
     void HelloTriangleApplication::cleanup() {
+        std::cout<<"[INFO] cleaning up...\n";
         for(auto imageView : swapChainImageViews){
             vkDestroyImageView(device,imageView,nullptr);
         }

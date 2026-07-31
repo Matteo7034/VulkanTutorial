@@ -97,7 +97,7 @@ namespace VkDevices{
         if ( !deviceFeatures.geometryShader){
             return 0;
         }
-        
+        std::cout<<"[INFO] Device Suitability score: "<<score<<"\n";        
        // return deviceProperties.deviceType == VK_PHYSICAL_DEVICE_TYPE_DISCRETE_GPU && deviceFeatures.geometryShader;
         return score;
     }
