@@ -3,10 +3,13 @@
 #include <fstream>
 #include <vulkan/vulkan.h>
 #include <iostream>
+#include "../include/swapchain.hpp"
 namespace PipeLine{
-    void createGraphicsPipeline(VkDevice device);
+    void createGraphicsPipeline(VkDevice device,VkExtent2D swapChainExtent,
+            VkPipelineLayout& pipelineLayout);
     std::vector<char> readFile(const std::string& filename);
     VkShaderModule createShaderModule(
-            const std::vector<char>& code,VkDevice device);
+            const std::vector<char>& code,
+            VkDevice device);
 
 }//namespace PipeLine

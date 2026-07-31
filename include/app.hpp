@@ -36,10 +36,13 @@ namespace App {
         VkQueue graphicsQueue;    
         VkSurfaceKHR surface;
         VkQueue presentQueue;
+        //SwapChain
         VkSwapchainKHR swapChain;
         std::vector<VkImage> swapChainImages;
         VkFormat swapChainImageFormat;
         VkExtent2D swapChainExtent;
         std::vector<VkImageView> swapChainImageViews;
+        //pipeline
+        VkPipelineLayout pipelineLayout;
     };
 }// namespace App

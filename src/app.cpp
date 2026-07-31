@@ -42,7 +42,7 @@ namespace App{
         createSwapChain();
         createImageViews();
         std::cout<<"[INFO] creating Graphics pipeline\n";
-        PipeLine::createGraphicsPipeline(device);
+        PipeLine::createGraphicsPipeline(device,swapChainExtent,pipelineLayout);
     }
     
     void HelloTriangleApplication::mainLoop() {
@@ -53,6 +53,8 @@ namespace App{
 
     void HelloTriangleApplication::cleanup() {
         std::cout<<"[INFO] cleaning up...\n";
+        //vkDestroyPipeline(device, graphicsPipeline, nullptr);
+        vkDestroyPipelineLayout(device, pipelineLayout, nullptr);
         for(auto imageView : swapChainImageViews){
             vkDestroyImageView(device,imageView,nullptr);
         }
