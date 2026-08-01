@@ -42,7 +42,22 @@ namespace App{
         createSwapChain();
         createImageViews();
         std::cout<<"[INFO] creating Graphics pipeline\n";
-        PipeLine::createGraphicsPipeline(device,swapChainExtent,pipelineLayout);
+        renderPass = SwapChain::createRenderPass(
+                device,
+                swapChainImageFormat
+                );
+        PipeLine::createGraphicsPipeline(
+                device,
+                swapChainExtent,
+                pipelineLayout,
+                renderPass,
+                graphicsPipeline);
+        swapChainFramebuffers = SwapChain::createFramebuffers(
+            device,
+            renderPass,
+            swapChainImageViews,
+            //swapChainFramebuffers,
+            swapChainExtent);
     }
     
     void HelloTriangleApplication::mainLoop() {
@@ -54,7 +69,12 @@ namespace App{
     void HelloTriangleApplication::cleanup() {
         std::cout<<"[INFO] cleaning up...\n";
         //vkDestroyPipeline(device, graphicsPipeline, nullptr);
+        for (auto framebuffer : swapChainFramebuffers) {
+           vkDestroyFramebuffer(device, framebuffer, nullptr);
+        }
+        vkDestroyPipeline(device, graphicsPipeline, nullptr);
         vkDestroyPipelineLayout(device, pipelineLayout, nullptr);
+        vkDestroyRenderPass(device, renderPass, nullptr);
         for(auto imageView : swapChainImageViews){
             vkDestroyImageView(device,imageView,nullptr);
         }

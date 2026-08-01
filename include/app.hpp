@@ -42,7 +42,10 @@ namespace App {
         VkFormat swapChainImageFormat;
         VkExtent2D swapChainExtent;
         std::vector<VkImageView> swapChainImageViews;
+        std::vector<VkFramebuffer> swapChainFramebuffers;
+        VkRenderPass renderPass;
         //pipeline
         VkPipelineLayout pipelineLayout;
+        VkPipeline graphicsPipeline;
     };
 }// namespace App

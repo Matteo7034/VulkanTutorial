@@ -36,4 +36,17 @@ namespace SwapChain{
             const std::vector<VkImage>& swapChainImages,
             VkFormat swapChainImageFormat
             );
+
+    VkRenderPass createRenderPass(
+            VkDevice device,
+            VkFormat swapChainImageFormat
+            );
+    
+    std::vector<VkFramebuffer> createFramebuffers(
+            VkDevice device,
+            VkRenderPass renderPass,
+            const std::vector<VkImageView>& swapChainImageViews,
+            //std::vector<VkFramebuffer>& swapChainFramebuffers,
+            VkExtent2D swapChainExtent
+            );
 }//namespace SwapChain
