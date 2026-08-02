@@ -5,8 +5,14 @@
 #include <iostream>
 #include <stdexcept>
 #include <vector>
+#include <cstdint>
 #include <vulkan/vulkan.h>
 #include <vulkan/vulkan_core.h>
+#include "../include/debug.hpp"
+#include "../include/init.hpp"
+#include "../include/device.hpp"
+#include "../include/pipeline.hpp"
+#include "../include/commands.hpp"
 
 constexpr uint32_t WIDTH = 800;
 constexpr uint32_t HEIGHT = 600;
@@ -47,5 +53,8 @@ namespace App {
         //pipeline
         VkPipelineLayout pipelineLayout;
         VkPipeline graphicsPipeline;
+        //Command Buffer
+        VkCommandPool commandPool;
+        VkCommandBuffer commandBuffer;
     };
 }// namespace App

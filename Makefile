@@ -4,7 +4,7 @@ LDFLAGS = -lglfw -lvulkan -ldl -lpthread -lX11  -lXrandr -lXi
 
 GLSLC = glslc
 
-SRC = src/main.cpp src/app.cpp src/init.cpp utils/debug.cpp src/device.cpp src/swapchain.cpp src/pipeline.cpp
+SRC = src/main.cpp src/app.cpp src/init.cpp utils/debug.cpp src/device.cpp src/swapchain.cpp src/pipeline.cpp src/commands.cpp
 OBJ = $(SRC:.cpp=.o)
 
 VERT_SOURCES = $(wildcard shaders/*.vert)

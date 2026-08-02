@@ -1,13 +1,4 @@
 #include "../include/app.hpp"
-#include "../include/debug.hpp"
-#include "../include/init.hpp"
-#include "../include/device.hpp"
-#include "../include/pipeline.hpp"
-#include <cstdint>
-#include <iostream>
-#include <vector>
-#include <vulkan/vulkan_core.h>
-#include <GLFW/glfw3.h>
 namespace App{
     void HelloTriangleApplication::run() {
       initWindow();
@@ -58,6 +49,8 @@ namespace App{
             swapChainImageViews,
             //swapChainFramebuffers,
             swapChainExtent);
+        commandPool = Commands::createCommandPool(device,physicalDevice,surface);
+        commandBuffer = Commands::createCommandBuffer(device,commandPool,renderPass);
     }
     
     void HelloTriangleApplication::mainLoop() {
@@ -68,6 +61,7 @@ namespace App{
 
     void HelloTriangleApplication::cleanup() {
         std::cout<<"[INFO] cleaning up...\n";
+        vkDestroyCommandPool(device, commandPool, nullptr);
         //vkDestroyPipeline(device, graphicsPipeline, nullptr);
         for (auto framebuffer : swapChainFramebuffers) {
            vkDestroyFramebuffer(device, framebuffer, nullptr);
