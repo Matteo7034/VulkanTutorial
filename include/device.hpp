@@ -5,9 +5,9 @@
 #include <vector>
 #include <map>
 #include <optional>
-#include "../include/debug.hpp"
+#include "debug.hpp"
 #include <set>
-#include "../include/swapchain.hpp"
+#include "swapchain.hpp"
 namespace VkDevices {
 
     //needed for swapchain 

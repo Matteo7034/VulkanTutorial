@@ -1,6 +1,6 @@
 #pragma once
 #include <vulkan/vulkan.h>
-#include "../include/device.hpp"
+#include "device.hpp"
 namespace Commands{
     VkCommandPool createCommandPool(
             VkDevice device,

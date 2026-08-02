@@ -8,11 +8,11 @@
 #include <cstdint>
 #include <vulkan/vulkan.h>
 #include <vulkan/vulkan_core.h>
-#include "../include/debug.hpp"
-#include "../include/init.hpp"
-#include "../include/device.hpp"
-#include "../include/pipeline.hpp"
-#include "../include/commands.hpp"
+#include "debug.hpp"
+#include "init.hpp"
+#include "device.hpp"
+#include "pipeline.hpp"
+#include "commands.hpp"
 
 constexpr uint32_t WIDTH = 800;
 constexpr uint32_t HEIGHT = 600;
