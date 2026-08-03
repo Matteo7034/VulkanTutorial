@@ -5,7 +5,7 @@ Progressi nello studio di VulkanTutorial...
 ![Triangle](assets/triangle.png)
 
 ## Tree:
-![Tree](assets/screen2.png)
+![Tree](assets/screen3.png)
 
 ## Usage:
 
