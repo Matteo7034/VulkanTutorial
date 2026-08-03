@@ -1,16 +1,18 @@
 #pragma once
 #include <vulkan/vulkan.h>
 #include "device.hpp"
+#include "app.hpp"
 namespace Commands{
     VkCommandPool createCommandPool(
             VkDevice device,
             VkPhysicalDevice physicalDevice,
             VkSurfaceKHR surface);
 
-    VkCommandBuffer createCommandBuffer(
+    std::vector<VkCommandBuffer> createCommandBuffers(
            VkDevice device,
            VkCommandPool commandPool,
-           VkRenderPass renderPass
+           VkRenderPass renderPass,
+           uint32_t count
            );
 
 

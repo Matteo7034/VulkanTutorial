@@ -18,25 +18,28 @@ namespace Commands{
 
 
 
-    VkCommandBuffer createCommandBuffer(
+    std::vector<VkCommandBuffer>  createCommandBuffers(
             VkDevice device,
             VkCommandPool commandPool,
-            VkRenderPass renderPass)
+            VkRenderPass renderPass,
+            uint32_t count)
     {
-
+        std::vector<VkCommandBuffer> commandBuffers(count);
+        commandBuffers.resize(MAX_FRAMES_IN_FLIGHT);
+        
         VkCommandBufferAllocateInfo allocInfo{};
+        allocInfo.commandBufferCount = (uint32_t) commandBuffers.size();
         allocInfo.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO;
         allocInfo.commandPool = commandPool;
         allocInfo.level = VK_COMMAND_BUFFER_LEVEL_PRIMARY;
-        allocInfo.commandBufferCount = 1;
-        VkCommandBuffer commandBuffer;
+        allocInfo.commandBufferCount = count;
         if (vkAllocateCommandBuffers(
                     device,
                     &allocInfo, 
-                    &commandBuffer) != VK_SUCCESS) {
+                    commandBuffers.data()) != VK_SUCCESS) {
             throw std::runtime_error("failed to allocate command buffers!");
         }
-        return commandBuffer;
+        return commandBuffers;
     }
 
     void recordCommandBuffer(
