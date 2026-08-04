@@ -36,6 +36,8 @@ namespace App {
         void createImageViews();
         void drawFrame();
         void createSyncObjects();
+        void recreateSwapChain();
+        void cleanupSwapChain();
         VkInstance instance; 
         GLFWwindow *window;
         VkDebugUtilsMessengerEXT debugMessenger;
