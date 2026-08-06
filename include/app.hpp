@@ -38,6 +38,7 @@ namespace App {
         void createSyncObjects();
         void recreateSwapChain();
         void cleanupSwapChain();
+        static void framebufferResizeCallback(GLFWwindow* window, int width, int height);
         VkInstance instance; 
         GLFWwindow *window;
         VkDebugUtilsMessengerEXT debugMessenger;
@@ -64,6 +65,7 @@ namespace App {
         std::vector<VkSemaphore> imageAvailableSemaphores;
         std::vector<VkSemaphore> renderFinishedSemaphores;
         std::vector<VkFence> inFlightFences;
+        bool framebufferResized = false;
         uint32_t currentFrame = 0;
 
     };
